@@ -5,10 +5,13 @@ import {homeStyles} from '../styles';
 import axios from 'axios';
 import ListItem from '../components/list-item';
 import {URL} from '../constants';
+import {useSelector, useDispatch} from 'react-redux';
+import {ADD_ITEMS} from '../redux/constants';
 
 export default function HomeScreen() {
   const [disabled, setDisabled] = useState(false);
-  const [items, setItems] = useState([]);
+  const state = useSelector((state) => state.addItemsReducer);
+  const dispatch = useDispatch();
 
   // This function fetch data using axios
   const fetchData = () => {
@@ -16,7 +19,10 @@ export default function HomeScreen() {
     axios
       .get(URL)
       .then((res) => {
-        setItems(res.data);
+        const data = {
+          data: res.data,
+        };
+        dispatch({type: ADD_ITEMS, payload: data});
         console.log(res.data);
         setDisabled(false);
       })
@@ -30,7 +36,7 @@ export default function HomeScreen() {
     <View style={homeStyles.container}>
       <Text style={homeStyles.textTitle}>Hello</Text>
       <Button title={'Fetch data'} disabled={disabled} onPress={fetchData} />
-      <ListItem data={items} />
+      <ListItem data={state.items} />
     </View>
   );
 }
