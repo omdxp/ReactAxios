@@ -9,7 +9,7 @@ export default function ListItem({data}) {
     <View style={listItemStyles.container}>
       <FlatList
         data={data}
-        renderItem={(item) => <Item item={item.item} />}
+        renderItem={(item) => <Item item={item.item} index={item.index} />}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={() => <ItemSeperator />}
       />

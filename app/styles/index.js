@@ -49,6 +49,7 @@ export const itemStyles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   textItem: {
+    width: '90%',
     fontSize: 40,
     color: COLORS.mainColorDark,
   },

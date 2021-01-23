@@ -4,6 +4,7 @@ import Button from '../components/button';
 import {homeStyles} from '../styles';
 import axios from 'axios';
 import ListItem from '../components/list-item';
+import {URL} from '../constants';
 
 export default function HomeScreen() {
   const [disabled, setDisabled] = useState(false);
@@ -13,7 +14,7 @@ export default function HomeScreen() {
   const fetchData = () => {
     setDisabled(true);
     axios
-      .get('https://jsonplaceholder.typicode.com/todos')
+      .get(URL)
       .then((res) => {
         setItems(res.data);
         console.log(res.data);
@@ -29,7 +30,6 @@ export default function HomeScreen() {
     <View style={homeStyles.container}>
       <Text style={homeStyles.textTitle}>Hello</Text>
       <Button title={'Fetch data'} disabled={disabled} onPress={fetchData} />
-
       <ListItem data={items} />
     </View>
   );
